@@ -40,7 +40,13 @@ It solves the problem of scattered game sales data and difficulty in analyzing i
 3. Global game sales peaked in 2008 (over 60 million USD in Global_Sales)
 
 ## 7. How to Run Locally
-streamlit run gamesales.py
+1. Install required packages: pip install -r requirements.txt
+2. Navigate to the folder containing the script and run: streamlit run gamesales.py
+3. Use the sidebar filters to select platform, genre, and release year.
+4. Enter a game name to search.
+5. View sales distribution by region and platform.
+6. Analyze genre preferences and trends through visual charts.
+7. View the Top 10 best-selling games list.
 
 
 ## 8. Author

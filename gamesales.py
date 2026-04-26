@@ -80,16 +80,11 @@ with st.sidebar:
     st.write("Year Range:", f"{min_year}-{max_year}")
     st.write("Genres:", len(df_clean['Genre'].unique()))
 
-# Anchor mapping
-anchor_map = {"Overview Trends":"overview","Game Search":"search","Top 10 Games":"top10","Regional Analysis":"regional","Data Overview":"data"}
-
-# Data Overview
-st.markdown('<div id="data"></div>', unsafe_allow_html=True)
+# Data Overview (always visible)
 st.subheader("Data Overview")
 st.dataframe(data.head(10), use_container_width=True)
 
-# Overview Trends
-st.markdown('<div id="overview"></div>', unsafe_allow_html=True)
+# Overview Trends (always visible)
 st.subheader("Global Sales Overview & Trends")
 col1, col2 = st.columns(2)
 with col1:
@@ -107,8 +102,7 @@ with col4:
     st.write("**Top 10 Genres by Sales**")
     st.bar_chart(df_clean.groupby('Genre')['Global_Sales'].sum().sort_values(ascending=False).head(10))
 
-# Game Search
-st.markdown('<div id="search"></div>', unsafe_allow_html=True)
+# Game Search (always visible)
 st.subheader("Game Search")
 game_name = st.text_input("🔍 Enter the game name to search:")
 if game_name:
@@ -121,15 +115,13 @@ if game_name:
             st.write(f"{region}: {sale:.2f}M")
         st.bar_chart(pd.Series(sales))
 
-# Top 10 Games
-st.markdown('<div id="top10"></div>', unsafe_allow_html=True)
+# Top 10 Games (always visible)
 st.subheader("👑 Top 10 Best Selling Games")
 top10 = filtered_df.sort_values('Global_Sales', ascending=False).head(10)[["Name","Platform","Year","Genre","Global_Sales"]]
 st.dataframe(top10, use_container_width=True, hide_index=True)
 st.bar_chart(top10.set_index("Name")["Global_Sales"])
 
-# Regional Analysis
-st.markdown('<div id="regional"></div>', unsafe_allow_html=True)
+# Regional Analysis (always visible)
 st.header("Regional Genre Preference Comparison")
 if not filtered_df.empty:
     plot_type = st.radio("Chart Type", ["Bar Chart", "Pie Chart"], horizontal=True)
@@ -143,8 +135,3 @@ if not filtered_df.empty:
             fig, ax = plt.subplots()
             ax.pie(data_region, labels=data_region.index, autopct="%1.1f%%")
             st.pyplot(fig)
-
-# Smooth scroll
-target_id = anchor_map[st.session_state.nav_choice]
-scroll_js = f"""<script>window.onload=function(){{let el=parent.document.getElementById('{target_id}');if(el)el.scrollIntoView({{behavior:'smooth'}});}}</script>"""
-st.components.v1.html(scroll_js, height=0)

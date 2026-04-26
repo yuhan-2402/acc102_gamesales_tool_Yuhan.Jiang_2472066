@@ -2,7 +2,7 @@
 XJTLU ACC102 Track4 - Global Game Sales Interactive Analysis Tool
 
 # Online Tool Link
-
+https://acc102gamesalestoolyuhanjiang2472066-v7st6n8fskjzthqhrywf6h.streamlit.app/
 
 ## 1. Project Purpose & Target Users
 This interactive tool is designed for game industry analysts, researchers, marketing teams, and gaming enthusiasts.
